@@ -16,12 +16,14 @@
             print_r($o);
             echo '</pre>';
         }
+        
+        debug($_POST);
 
         $pdo = new PDO('mysql:dbname=a21rammo;host=localhost', 'raman', 'user_password');
         
-        foreach($pdo -> query( 'SELECT * FROM KID;') as $row) {
-            debug($row);
-        }
+        // foreach($pdo -> query( 'SELECT * FROM KID;') as $row) {
+        //     debug($row);
+        // }
         echo '<ul>';
         foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
             echo '<li>'.$row['name'].', '.$row['type'].'</li>';
@@ -30,13 +32,14 @@
 
     ?>
     <form action=" db.php " method="post">
-        <select size='1' name=' b_user'>
+        <select size='1' name='KID'>
             <?php
                 foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
-                    echo '<option>'.$row['name'].'</option>';
+                    echo '<option value="1">'.$row['name'].'</option>';
                 }
             ?>
         </select>
+        <input type="submit" value="Show kid">
     </form>
 
 </body>
