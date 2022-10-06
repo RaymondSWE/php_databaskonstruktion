@@ -32,7 +32,7 @@
 
     ?>
     <form action=" db.php " method="POST">
-        <select size='1' name='KID'>
+        <select size='1' name='kid'>
             <?php
                 foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
                     echo '<option value="'.$row['PNR'].'">'.$row['name'].'</option>';
@@ -42,6 +42,22 @@
         <input type="submit" value="Show SSN">
     </form>
 
-</body>
 
+    <?php
+        // Data will only show if only data is set.
+        echo '<div>';
+        if(isset($_POST['kid'])) {
+            echo '<div>';
+            foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
+
+            }
+            
+        }else {
+            echo '<h3> Pick a kid, to see information about them: </h3>';
+        }
+        'echo </div>';   
+    ?>
+
+
+</body>
 </html>
