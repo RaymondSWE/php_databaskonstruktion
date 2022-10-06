@@ -31,15 +31,15 @@
         echo '</ul>';
 
     ?>
-    <form action=" db.php " method="post">
+    <form action=" db.php " method="POST">
         <select size='1' name='KID'>
             <?php
                 foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
-                    echo '<option value="1">'.$row['name'].'</option>';
+                    echo '<option value="'.$row['PNR'].'">'.$row['name'].'</option>';
                 }
             ?>
         </select>
-        <input type="submit" value="Show kid">
+        <input type="submit" value="Show SSN">
     </form>
 
 </body>
