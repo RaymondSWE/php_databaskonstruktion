@@ -31,7 +31,7 @@
         echo '</ul>';
 
     ?>
-    <form action=" db.php " method="POST">
+    <form action="index.php" method="POST">
         <select size='1' name='kid'>
             <?php
                 foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
@@ -44,12 +44,16 @@
 
 
     <?php
-        // Data will only show if only data is set.
+        // Data query to our database
         echo '<div>';
         if(isset($_POST['kid'])) {
-            echo '<div>';
-            foreach($pdo->query( 'SELECT * FROM KID;' ) as $row){
-
+            $query = ' SELECT * FROM kid WHERE name=:name;';
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':name', $_POST['kid']);
+            $stmt->execute();
+            foreach($stmt as $key -> $row){
+                echo '<div>'.$row['pnr'].'</div>';
+                echo '<div>'.$row['birthday'].'</div>';
             }
             
         }else {
@@ -57,6 +61,14 @@
         }
         'echo </div>';   
     ?>
+
+    <form action="index.php" method"post">
+        <input type="text" name"pnr" placeholder="pnr"><br>
+        <input type="text" name"name" placeholder="name"><br>
+        <input type="text" name"birthday" placeholder="birthday"><br>
+        <input type="text" name"disobedience" placeholder="disobedience"><br>
+        <input type="text" name"type" placeholder="type"><br>
+    </form>
 
 
 </body>
