@@ -45,7 +45,6 @@
 
     <?php
         // Data query to our database
-        echo '<div>';
         if(isset($_POST['kid'])) {
             $query = ' SELECT * FROM kid WHERE name=:name;';
             $stmt = $pdo->prepare($query);
@@ -55,21 +54,34 @@
                 echo '<div>'.$row['pnr'].'</div>';
                 echo '<div>'.$row['birthday'].'</div>';
             }
-            
-        }else {
-            echo '<h3> Pick a kid, to see information about them: </h3>';
         }
-        'echo </div>';   
     ?>
 
-    <form action="index.php" method"post">
+    <form action="index.php" method="post">
         <input type="text" name"pnr" placeholder="pnr"><br>
         <input type="text" name"name" placeholder="name"><br>
         <input type="text" name"birthday" placeholder="birthday"><br>
         <input type="text" name"disobedience" placeholder="disobedience"><br>
+        <input type="text" name"deliveryNr" placeholder="deliveryNr"><br>
         <input type="text" name"type" placeholder="type"><br>
+        <input type="submit" value="add kid">
     </form>
+        
 
+    <?php
+        // insert new data to our kid table
+        if(isset($_POST['pnr'])) {
+            $querystring='INSERT INTO kid (pnr,name,birthday,disobedience,deliveryNr,type) VALUES(:pnr,:name,:birthday,:disobedience,:deliveryNr,:type);';
+            $stmt = $pdo->prepare($querystring);
+            $stmt->bindParam(':pnr', $_POST['pnr']);
+            $stmt->bindParam(':name', $_POST['name']);
+            $stmt->bindParam(':birthday', $_POST['birthday']);
+            $stmt->bindParam(':disobedience', $_POST['disobedience']);
+            $stmt->bindParam(':deliveryNr', $_POST['deliveryNr']);
+            $stmt->bindParam(':type', $_POST['type']);
+            $stmt->execute();
+        }
+    ?>
 
 </body>
 </html>
