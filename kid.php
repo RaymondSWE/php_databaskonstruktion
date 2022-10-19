@@ -39,24 +39,32 @@
 ?>
 </table>
 
+  
+<h3>Update kids name</h3>
+	
+<?php
 
-<h3>Kid Option Box</h3>
-<form action="kid.php" method="post">
-	<select size='1' name='PNR'>
-<?php		
-		foreach($pdo->query( 'SELECT * FROM kid ORDER BY NAME;' ) as $row){
-			echo '<option value="'.$row['PNR'].'">';
-			echo $row['name'];			
-			echo '</option>';
-		}		
+
+		if(isset($_POST['CustPNR'])){
+				$querystring='UPDATE kid SET name=:name WHERE PNR=:CUSTPNR;';
+				$stmt = $pdo->prepare($querystring);
+				$stmt->bindParam(':name', $_POST['Custname']);
+				$stmt->bindParam(':CUSTPNR', $_POST['CustPNR']);			
+				$stmt->execute();				
+		}
+	
+		foreach($pdo->query("SELECT * FROM kid") as $row){
+			echo "<form style='margin:0;display: flex;' action='kid.php' method='post' >";
+			echo "<span style='flex: 4;border: 1px solid red;'>".$row['PNR']."</span>";			
+			echo "<span style='flex: 4;border: 1px solid red;'>";
+				echo "<input type='text' name='Custname' value='".$row['name']."'>";
+				echo "<input type='hidden' name='CustPNR' value='".$row['PNR']."'>";
+			echo "</span>";			
+			echo "<span style='flex: 4;border: 1px solid red;'>".$row['birthday']."</span>";
+			echo "<span style='flex: 4;border: 1px solid red;'><input type='submit' value='Save!' /></span>";			
+			echo "</form>";
+		}
+		
 ?>
-   </select>
-   <input type="submit" value="Send">
-   <input type="reset">
-</form>
-
-
-
-    
 </body>
 </html>

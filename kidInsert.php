@@ -53,6 +53,23 @@ Type: <input type="text" name="type" /><br>
 		}
 ?>
 </table>
-</body>
 
+
+<h3>Kid Option Box</h3>
+<form action="kid.php" method="post">
+	<select size='1' name='PNR'>
+<?php		
+		foreach($pdo->query( 'SELECT * FROM kid ORDER BY NAME;' ) as $row){
+			echo '<option value="'.$row['PNR'].'">';
+			echo $row['name'];			
+			echo '</option>';
+		}		
+?>
+   </select>
+   <input type="submit" value="Send">
+   <input type="reset">
+</form>
+
+</table>
+</body>
 </html>
