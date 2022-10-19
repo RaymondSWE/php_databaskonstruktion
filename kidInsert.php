@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h3>DB</h3>
+    <h1>Kid Insert Data</h1>
     <?php
 // function debug($o)
 // {
@@ -73,6 +73,7 @@ Type: <input type="text" name="type" /><br>
 
 <table>
  
+<h3>Query Generator</h3>
 <?php  
     foreach($pdo->query( 'SELECT * FROM kid;' ) as $row){
       echo "<tr><td>";

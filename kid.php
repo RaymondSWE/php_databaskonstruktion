@@ -119,7 +119,7 @@
 		echo "</table>"; 
 ?>
 
-<h3>Response Page</h3>
+<h3>Query Execution from kid insert page</h3>
 <table border='1'>
  
 <?php 
@@ -142,7 +142,6 @@
         }
     }
 ?>
- 
 </table>
 
 
