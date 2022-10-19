@@ -24,26 +24,10 @@ $pdo = new PDO('mysql:dbname=a21rammo;host=localhost', 'raman', 'user_password')
 $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 ?>
 
-<h2>Wishlist Table</h2>
-<table border='1'>
-<?php
-		foreach($pdo->query("SELECT * FROM wishlist") as $row){
-			echo "<tr>";
-			echo "<td>".$row['year']."</td>";			
-			echo "<td>".$row['PNR']."</td>";			
-			echo "<td>".$row['toyId']."</td>";
-            echo "<td>".$row['description']."</td>";
-            echo "<td>".$row['conceded']."</td>";
-            echo "<td>".$row['delivered']."</td>";
-			echo "</tr>";
-		}		
-?>
-</table>
-
 
 
 <h3>Add new kid</h3>
-<form action="index.php" method="post">
+<form action="kidInsert.php" method="post">
 PNR: <input type="text" name="PNR" /><br>
 Name: <input type="text" name="name" /><br>
 Birthday: <input type="text" name="birthday" /><br>

@@ -41,7 +41,7 @@
 
 
 <h3>Kid Option Box</h3>
-<form action="db.php" method="post">
+<form action="kid.php" method="post">
 	<select size='1' name='PNR'>
 <?php		
 		foreach($pdo->query( 'SELECT * FROM kid ORDER BY NAME;' ) as $row){
