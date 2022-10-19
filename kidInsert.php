@@ -11,14 +11,14 @@
 <body>
     <h3>DB</h3>
     <?php
-function debug($o)
-{
-    echo '<pre>';
-    print_r($o);
-    echo '</pre>';
-}
+// function debug($o)
+// {
+//     echo '<pre>';
+//     print_r($o);
+//     echo '</pre>';
+// }
 
-debug($_POST);
+// debug($_POST);
 
 $pdo = new PDO('mysql:dbname=a21rammo;host=localhost', 'raman', 'user_password');
 $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
@@ -69,7 +69,18 @@ Type: <input type="text" name="type" /><br>
    <input type="submit" value="Send">
    <input type="reset">
 </form>
+</table>
 
+<table>
+ 
+<?php  
+    foreach($pdo->query( 'SELECT * FROM kid;' ) as $row){
+      echo "<tr><td>";
+      echo "<a href='kid.php?PNR=".urlencode($row['PNR'])."'>Kid: ".$row['name']."</a>";
+      echo "</td></tr>";  
+    }
+?>
+ 
 </table>
 </body>
 </html>

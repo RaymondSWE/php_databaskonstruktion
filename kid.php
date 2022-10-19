@@ -8,14 +8,6 @@
 </head>
 <body>
     <?php
-    function debug($o)
-    {
-        echo '<pre>';
-        print_r($o);
-        echo '</pre>';
-    }
-    
-    debug($_POST);
     
     $pdo = new PDO('mysql:dbname=a21rammo;host=localhost', 'raman', 'user_password');
     $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
@@ -125,8 +117,33 @@
 			echo "</tr>";
 		}
 		echo "</table>"; 
-		
 ?>
+
+<h3>Response Page</h3>
+<table border='1'>
+ 
+<?php 
+    if(isset($_GET['PNR'])){
+      
+        $querystring='SELECT * FROM kid WHERE PNR=:PNR';
+        
+        $stmt = $pdo->prepare($querystring);
+        $stmt->bindParam(':PNR', $_GET['PNR']);
+        $stmt->execute();            
+        foreach($stmt as $key => $row){
+          echo "<tr>";
+          echo "<td>".$row['PNR']."</td>";      
+          echo "<td>".$row['name']."</td>";      
+          echo "<td>".$row['birthday']."</td>";
+          echo "<td>".$row['disobedience']."</td>";
+          echo "<td>".$row['deliveryNr']."</td>";
+          echo "<td>".$row['type']."</td>";
+          echo "</tr>";
+        }
+    }
+?>
+ 
+</table>
 
 
 </body>
